@@ -1,0 +1,4 @@
+To run, First compile of course.  
+	mvn clean install
+Then:
+java -jar target/benchmarks.jar -t='ttl.jcstress.BadVisibility'

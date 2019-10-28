@@ -1,0 +1,255 @@
+
+<html>
+<head>
+<title>Java Concurrency Stress test report</title>
+ <style type="text/css">
+   * { font-family: Arial; }
+   table { font-size: 9pt; }
+   a { color: #000000; }
+   .progress { padding: 0px; }
+   .header { text-align: left; }
+   .section1 { font-size: 12pt; background-color: #BDB76B; color: #000000; font-weight: bold;}
+   .section2 { font-size: 12pt; background-color: #F0E68C; color: #000000; font-weight: bold;}
+   .cell1 { background-color: #FAFAD2; }
+   .cell2 { background-color: #EEE8AA; }
+   .passedProgress { background-color: #00AA00; color: #FFFFFF; text-align: center; font-weight: bold; }
+   .failedProgress { background-color: #FF0000; color: #FFFFFF; text-align: center; font-weight: bold; }
+   .passed { color: #00AA00; text-align: center; font-weight: bold; }
+   .failed { color: #FF0000; text-align: center; font-weight: bold; }
+   .interesting { color: #0000FF; text-align: center; font-weight: bold; }
+   .spec { color: #AAAA00; text-align: center; font-weight: bold; }
+   .endResult { font-size: 48pt; text-align: center; font-weight: bold; }
+ </style>
+</head>
+<body>
+<h1>ttl.jcstress.ReorderingManyFunctions</h1>
+<h3>Description and references</h3>
+<p>null</p>
+<h3>Environment</h3>
+<table>
+<tr>
+<td nowrap>java.specification.name</td>
+<td nowrap>Java Platform API Specification</td>
+</tr>
+<tr>
+<td nowrap>java.specification.vendor</td>
+<td nowrap>Oracle Corporation</td>
+</tr>
+<tr>
+<td nowrap>java.specification.version</td>
+<td nowrap>11</td>
+</tr>
+<tr>
+<td nowrap>java.vendor</td>
+<td nowrap>Oracle Corporation</td>
+</tr>
+<tr>
+<td nowrap>java.version</td>
+<td nowrap>11.0.1</td>
+</tr>
+<tr>
+<td nowrap>java.vm.name</td>
+<td nowrap>OpenJDK 64-Bit Server VM</td>
+</tr>
+<tr>
+<td nowrap>java.vm.vendor</td>
+<td nowrap>Oracle Corporation</td>
+</tr>
+<tr>
+<td nowrap>java.vm.version</td>
+<td nowrap>11.0.1+13</td>
+</tr>
+<tr>
+<td nowrap>os.arch</td>
+<td nowrap>amd64</td>
+</tr>
+<tr>
+<td nowrap>os.name</td>
+<td nowrap>Linux</td>
+</tr>
+<tr>
+<td nowrap>os.version</td>
+<td nowrap>4.15.0-46-generic</td>
+</tr>
+</table>
+<h3>Test configurations</h3>
+<table>
+<tr>
+<td nowrap><b>TC 1</b></td>
+<td nowrap>JVM options: []
+Iterations: 5
+Time: 1000
+Stride: [10, 10000] (capped by NONE)</td>
+</tr>
+<tr>
+<td nowrap><b>TC 2</b></td>
+<td nowrap>JVM options: [-XX:+UnlockDiagnosticVMOptions, -XX:+StressLCM, -XX:+StressGCM]
+Iterations: 5
+Time: 1000
+Stride: [10, 10000] (capped by NONE)</td>
+</tr>
+<tr>
+<td nowrap><b>TC 3</b></td>
+<td nowrap>JVM options: [-XX:-TieredCompilation]
+Iterations: 5
+Time: 1000
+Stride: [10, 10000] (capped by NONE)</td>
+</tr>
+<tr>
+<td nowrap><b>TC 4</b></td>
+<td nowrap>JVM options: [-XX:-TieredCompilation, -XX:+UnlockDiagnosticVMOptions, -XX:+StressLCM, -XX:+StressGCM]
+Iterations: 5
+Time: 1000
+Stride: [10, 10000] (capped by NONE)</td>
+</tr>
+<tr>
+<td nowrap><b>TC 5</b></td>
+<td nowrap>JVM options: [-XX:TieredStopAtLevel=1]
+Iterations: 5
+Time: 1000
+Stride: [10, 10000] (capped by NONE)</td>
+</tr>
+<tr>
+<td nowrap><b>TC 6</b></td>
+<td nowrap>JVM options: [-Xint]
+Iterations: 5
+Time: 1000
+Stride: [10, 10000] (capped by NONE)</td>
+</tr>
+</table>
+<h3>Observed states</h3>
+<table width=100% cellpadding=5>
+<tr>
+<th>Observed state</th>
+<th nowrap>TC 1</th>
+<th nowrap>TC 2</th>
+<th nowrap>TC 3</th>
+<th nowrap>TC 4</th>
+<th nowrap>TC 5</th>
+<th nowrap>TC 6</th>
+<th>Expectation</th>
+<th>Interpretation</th>
+</tr>
+<tr>
+<td align='center'>0, 1, 0, 0</td>
+<td align='right' width='5.0%' bgColor=#00ffff>56610</td>
+<td align='right' width='5.0%' bgColor=#00ffff>84830</td>
+<td align='right' width='5.0%' bgColor=#00ffff>13800</td>
+<td align='right' width='5.0%' bgColor=#00ffff>20359</td>
+<td align='right' width='5.0%' bgColor=#00ffff>8784</td>
+<td align='right' width='5.0%' bgColor=#00ffff>84</td>
+<td>ACCEPTABLE_INTERESTING</td>
+<td>Reordered</td>
+</tr>
+<tr>
+<td align='center'>0, 1, 0, 1</td>
+<td align='right' width='5.0%' bgColor=#00ff00>27005772</td>
+<td align='right' width='5.0%' bgColor=#00ff00>38553383</td>
+<td align='right' width='5.0%' bgColor=#00ff00>22885286</td>
+<td align='right' width='5.0%' bgColor=#00ff00>34857849</td>
+<td align='right' width='5.0%' bgColor=#00ff00>38219511</td>
+<td align='right' width='5.0%' bgColor=#00ff00>2590813</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>0, 1, 1, 0</td>
+<td align='right' width='5.0%' bgColor=#00ff00>11974</td>
+<td align='right' width='5.0%' bgColor=#00ff00>20162</td>
+<td align='right' width='5.0%' bgColor=#00ff00>8581</td>
+<td align='right' width='5.0%' bgColor=#00ff00>1394</td>
+<td align='right' width='5.0%' bgColor=#00ff00>19</td>
+<td align='right' width='5.0%' bgColor=#00ff00>15</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>0, 1, 1, 1</td>
+<td align='right' width='5.0%' bgColor=#00ff00>36102</td>
+<td align='right' width='5.0%' bgColor=#00ff00>14999</td>
+<td align='right' width='5.0%' bgColor=#00ff00>160946</td>
+<td align='right' width='5.0%' bgColor=#00ff00>5246</td>
+<td align='right' width='5.0%' bgColor=#00ff00>985</td>
+<td align='right' width='5.0%' bgColor=#00ff00>150</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>1, 0, 1, 0</td>
+<td align='right' width='5.0%' bgColor=#00ff00>50908803</td>
+<td align='right' width='5.0%' bgColor=#00ff00>34626226</td>
+<td align='right' width='5.0%' bgColor=#00ff00>50895344</td>
+<td align='right' width='5.0%' bgColor=#00ff00>37845517</td>
+<td align='right' width='5.0%' bgColor=#00ff00>25631497</td>
+<td align='right' width='5.0%' bgColor=#00ff00>3934060</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>1, 0, 1, 1</td>
+<td align='right' width='5.0%' bgColor=#00ff00>1</td>
+<td align='right' width='5.0%' bgColor=#00ff00>326</td>
+<td align='right' width='5.0%' bgColor=#00ff00>894</td>
+<td align='right' width='5.0%' bgColor=#00ff00>381</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>1, 1, 0, 0</td>
+<td align='right' width='5.0%' bgColor=#00ffff>25</td>
+<td align='right' width='5.0%' bgColor=#00ffff>617</td>
+<td align='right' width='5.0%' bgColor=#00ffff>47</td>
+<td align='right' width='5.0%' bgColor=#00ffff>1096</td>
+<td align='right' width='5.0%' bgColor=#00ffff>917</td>
+<td align='right' width='5.0%' bgColor=#00ffff>28</td>
+<td>ACCEPTABLE_INTERESTING</td>
+<td>Reordered</td>
+</tr>
+<tr>
+<td align='center'>1, 1, 0, 1</td>
+<td align='right' width='5.0%' bgColor=#00ff00>409</td>
+<td align='right' width='5.0%' bgColor=#00ff00>541</td>
+<td align='right' width='5.0%' bgColor=#00ff00>1729</td>
+<td align='right' width='5.0%' bgColor=#00ff00>1582</td>
+<td align='right' width='5.0%' bgColor=#00ff00>15909</td>
+<td align='right' width='5.0%' bgColor=#00ff00>17220</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>1, 1, 1, 0</td>
+<td align='right' width='5.0%' bgColor=#00ff00>126797</td>
+<td align='right' width='5.0%' bgColor=#00ff00>168096</td>
+<td align='right' width='5.0%' bgColor=#00ff00>109050</td>
+<td align='right' width='5.0%' bgColor=#00ff00>70984</td>
+<td align='right' width='5.0%' bgColor=#00ff00>83336</td>
+<td align='right' width='5.0%' bgColor=#00ff00>224420</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td align='center'>1, 1, 1, 1</td>
+<td align='right' width='5.0%' bgColor=#00ff00>129378</td>
+<td align='right' width='5.0%' bgColor=#00ff00>54341</td>
+<td align='right' width='5.0%' bgColor=#00ff00>274484</td>
+<td align='right' width='5.0%' bgColor=#00ff00>24943</td>
+<td align='right' width='5.0%' bgColor=#00ff00>188353</td>
+<td align='right' width='5.0%' bgColor=#00ff00>284851</td>
+<td>ACCEPTABLE</td>
+<td>All cool</td>
+</tr>
+<tr>
+<td></td>
+<td align='center' bgColor='green '>OK</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='center' bgColor='green '>OK</td>
+<td align='center' bgColor='green '>OK</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<h3>Auxiliary data</h3>
+</body>
+</html>
